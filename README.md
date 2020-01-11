@@ -1,6 +1,6 @@
 # ProductStoreChallenge
 
-For the CMC Technical Test Challenge. Project is based on the standard dotnet core React template.
+CMC Technical Test Challenge. Project is based on the standard dotnet core React template. I left comments throughout the source code. Please make sure that you read them
 
 ## Installation
 
