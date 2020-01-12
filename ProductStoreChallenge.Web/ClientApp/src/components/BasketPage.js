@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Row, Col } from 'reactstrap';
 
 import { Product } from './Product'
-//import { BasketTotal } from '.BasketTotal'
+import { BasketTotal } from './BasketTotal'
 
 export class BasketPage extends Component {
     static displayName = "Basket";
@@ -33,7 +33,7 @@ export class BasketPage extends Component {
                 <Row>
                     {content}
                 </Row>
-
+                <BasketTotal items={this.state.items}/>
             </React.Fragment>
         );
     }

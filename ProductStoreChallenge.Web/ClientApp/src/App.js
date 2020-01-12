@@ -45,7 +45,7 @@ export default class App extends Component {
     }
     render() {
         return (
-            <Layout>
+            <Layout basketItemCount={this.state.basket.items.length}>
                 <Route exact path='/' render={(routeProps) => (
                     <ProductPage onQtyChanged={this.handleQtyChanged} items={this.state.basket.items} />
                 )} />

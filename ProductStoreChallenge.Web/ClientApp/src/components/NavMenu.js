@@ -11,7 +11,7 @@ export class NavMenu extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+        collapsed: true
     };
   }
 
@@ -22,6 +22,7 @@ export class NavMenu extends Component {
   }
 
   render () {
+
     return (
       <header>
         <Navbar className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3" light>
@@ -34,7 +35,7 @@ export class NavMenu extends Component {
                     <NavLink tag={Link} className="text-dark" to="/">Products</NavLink>
                 </NavItem>
                 <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/basket">Basket</NavLink>
+                    <NavLink tag={Link} className="text-dark" to="/basket">Basket ({this.props.basketItemCount})</NavLink>
                 </NavItem>
               </ul>
             </Collapse>

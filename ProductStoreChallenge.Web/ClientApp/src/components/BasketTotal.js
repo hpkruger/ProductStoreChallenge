@@ -5,7 +5,7 @@ export class BasketTotal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            
+            items: this.props.items
         };
     }
 
