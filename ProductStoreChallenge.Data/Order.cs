@@ -7,8 +7,11 @@ namespace ProductStoreChallenge.Data
     {
         public string Id { get; set; }
 
-        public IEnumerable<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
+        public IEnumerable<OrderItem> Items { get; set; } = new List<OrderItem>();
 
-        public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
+        public decimal? TotalAmount { get; set; }
+
+        public DateTime? CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
     }
 }

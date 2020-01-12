@@ -29,18 +29,38 @@ namespace ProductStoreChallenge.Web.Tests
             TestWebApiHost.StopAsync().GetAwaiter().GetResult();
         }
         [TestMethod]
-        public async Task TestCalculateShippingCosts()
+        public async Task TestCalculateCorrectShippingAmountIfLowerThan50()
         {
-            var basketToCalculate = new Basket
+            var basket = new Basket
             {
-                Items = new[] { new BasketItem { Qty = 2, ProductId = "8A7501FA-8AFA-4A4F-9CDB-7E9B3C86BFC0" }, new BasketItem { Qty = 5, ProductId = "B8BB716A-93D1-4838-A7FA-057D84DAC15B" } }
+                Items = new[] { new BasketItem { Qty = 1, ProductId = "8A7501FA-8AFA-4A4F-9CDB-7E9B3C86BFC0" }}
             };
 
-            var response = await Client.GetAsync("/Calculations/ShippingCosts");
+            var response = await Client.PostAsJsonAsync("/Calculations/Shipping", basket);
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            var products = await response.Content.ReadAsAsync<IEnumerable<Product>>();
-
-            Assert.IsNotNull(products);
+            var shippingAmount = await response.Content.ReadAsAsync<decimal>();
+            Assert.AreEqual(10, shippingAmount);
         }
+        [TestMethod]
+        public async Task TestCalculateCorrectShippingAmountIfGreaterThan50()
+        {
+            var basket = new Basket
+            {
+                Items = new[] { new BasketItem { Qty = 10, ProductId = "8A7501FA-8AFA-4A4F-9CDB-7E9B3C86BFC0" } }
+            };
+
+            var response = await Client.PostAsJsonAsync("/Calculations/Shipping", basket);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            var shippingAmount = await response.Content.ReadAsAsync<decimal>();
+            Assert.AreEqual(20, shippingAmount);
+        }
+        [TestMethod]
+        public async Task TestCalculateCorrectShippingAmountIfEquals50()
+        {
+            //Hans: @todo
+            Assert.IsTrue(false);
+        }
+
+        //Hans: @todo: further tests for validating the subTotal and total amount calculations. I hope you are fine if I skip those because of time constraints
     }
 }

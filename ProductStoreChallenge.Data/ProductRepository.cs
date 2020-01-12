@@ -10,13 +10,13 @@ namespace ProductStoreChallenge.Data
     {
         private static readonly IDictionary<string, Product> ProductsDictionary = new []
         {
-            new Product { Id = "8A7501FA-8AFA-4A4F-9CDB-7E9B3C86BFC0", Name = "Fisher-Price Smart Stages Piggy ", Price = 11.99},
-            new Product { Id = "2E09B84B-9980-4096-9FC6-1F6E8E846779", Name = "Green Toys Airplane", Price = 14.99},
-            new Product { Id = "30951A58-9A77-40AE-A814-9B7892AEE0AE", Name = "Johnson's Sleepy Baby Gift Set", Price = 10.99},
-            new Product { Id = "B8BB716A-93D1-4838-A7FA-057D84DAC15B", Name = "Green Toys Helicopter", Price = 19.99},
-            new Product { Id = "2C8E90E9-5CBE-49C7-BCEF-0255350BE25F", Name = "Green Toys Construction Vehicle", Price = 34.99},
-            new Product { Id = "6974384A-FBC9-4E6A-B604-156E004D7509", Name = "The First Years First Rattle", Price = 7.99},
-            new Product { Id = "947094F0-35A6-4024-9946-AF7E6B318421", Name = "HOMOFY Baby Toys Funny Hammer", Price = 15.99}
+            new Product { Id = "8A7501FA-8AFA-4A4F-9CDB-7E9B3C86BFC0", Name = "Fisher-Price Smart Stages Piggy ", Price = 11.99m},
+            new Product { Id = "2E09B84B-9980-4096-9FC6-1F6E8E846779", Name = "Green Toys Airplane", Price = 14.99m},
+            new Product { Id = "30951A58-9A77-40AE-A814-9B7892AEE0AE", Name = "Johnson's Sleepy Baby Gift Set", Price = 10.99m},
+            new Product { Id = "B8BB716A-93D1-4838-A7FA-057D84DAC15B", Name = "Green Toys Helicopter", Price = 19.99m},
+            new Product { Id = "2C8E90E9-5CBE-49C7-BCEF-0255350BE25F", Name = "Green Toys Construction Vehicle", Price = 34.99m},
+            new Product { Id = "6974384A-FBC9-4E6A-B604-156E004D7509", Name = "The First Years First Rattle", Price = 7.99m},
+            new Product { Id = "947094F0-35A6-4024-9946-AF7E6B318421", Name = "HOMOFY Baby Toys Funny Hammer", Price = 15.99m}
         }.ToDictionary(item => item.Id, item => item);
 
         public async Task<IEnumerable<Product>> GetAllAsync()

@@ -32,7 +32,9 @@ namespace ProductStoreChallenge.Web
             });
 
             services.AddScoped<IProductRepository, ProductRepository>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ICalculationService, CalculationService>();
+            services.AddScoped<IOrderService, OrderService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

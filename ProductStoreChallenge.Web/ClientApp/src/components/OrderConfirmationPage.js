@@ -1,21 +1,15 @@
 import React, { Component } from 'react';
+import { Row, Col } from 'reactstrap';
 
 export class OrderConfirmationPage extends Component {
   static displayName = "Thank you";
 
-  constructor(props) {
-    super(props);
-    this.state = { };
-  }
-
-  componentDidMount() {
-  }
 
   render() {
     return (
-      <div>
-        <h1>Thank you for your order</h1>
-      </div>
+        <Row className="justify-content-center">
+            <h1>Thank you for your order</h1>
+        </Row>
     );
   }
 }

@@ -8,7 +8,7 @@ export class ProductPage extends Component {
     constructor(props) {
         super(props);
 
-        this.state = { products: [], loading: true, items: this.props.items }
+        this.state = { products: [], loading: true}
 
     }
     componentDidMount() {
@@ -17,7 +17,7 @@ export class ProductPage extends Component {
     // Hans: I prefer using async/await as opposed to chaining Javascript promises as it makes reading asynchronous code easier
     async fetchProducts() {
         try {
-            const response = await fetch('/products/');
+            const response = await fetch('/Products/');
             const data = await response.json();
             this.setState({ products: data, loading: false });
         }
@@ -34,11 +34,11 @@ export class ProductPage extends Component {
     }
 
     getQtyInBasket = (productId) => {
-        let index = this.state.items.findIndex((item) => {
+        let index = this.props.items.findIndex((item) => {
             return item.product.id === productId;
         });
         if (index > -1) {
-            return this.state.items[index].qty;
+            return this.props.items[index].qty;
         }
         return 0;
     }

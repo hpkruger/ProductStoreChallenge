@@ -29,7 +29,7 @@ namespace ProductStoreChallenge.Web.Tests
             TestWebApiHost.StopAsync().GetAwaiter().GetResult();
         }
         [TestMethod]
-        public async Task TestGetProducts()
+        public async Task TestGetProductsNotEmpty()
         {
             var response = await Client.GetAsync("/Products/");
             Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);

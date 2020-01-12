@@ -17,13 +17,15 @@ export default class App extends Component {
         // Now, this is cumbersome and one of the reasons why people use other libraries such as Redux for global state management which allows to dispatch events from every component in the hierarchy
         // For this challenge though I decided to just stick to pure React without Redux.
         this.state = {
-            basket: { items: [] }
+            items: []
         }
     }
     handleQtyChanged = (product, qty) => {
 
         this.setState(prevState => {
-            let items = Object.assign([], prevState.basket.items);
+            let items = JSON.parse(JSON.stringify(prevState.items)); // Hans: React state needs to be immutable, so we need to copy the entire array here
+            console.log("handleQtyChanged");
+
             let index = items.findIndex((item) => {
                 return item.product.id === product.id;
             });
@@ -38,20 +40,20 @@ export default class App extends Component {
             else {
                 items.push({ product, qty }); //new
             }
-            return { basket: { items } };
+            return { items };
         }, () => {
-                console.log(`Basket: ${JSON.stringify(this.state.basket.items)}`);
+                console.log(`Basket: ${JSON.stringify(this.state.items)}`);
         });
     }
     render() {
         return (
-            <Layout basketItemCount={this.state.basket.items.length}>
+            <Layout basketItemCount={this.state.items.length}>
                 <Route exact path='/' render={(routeProps) => (
-                    <ProductPage onQtyChanged={this.handleQtyChanged} items={this.state.basket.items} />
+                    <ProductPage onQtyChanged={this.handleQtyChanged} items={this.state.items} />
                 )} />
     
                 <Route path='/Basket' render={(routeProps) => (
-                    <BasketPage onQtyChanged={this.handleQtyChanged} items={this.state.basket.items} />
+                    <BasketPage onQtyChanged={this.handleQtyChanged} items={this.state.items} />
                 )} />
                 <Route path='/OrderConfirmation' component={OrderConfirmationPage} />
             </Layout>

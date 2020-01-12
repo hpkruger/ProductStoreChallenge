@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ProductStoreChallenge.Data;
 using System;
 using System.Collections.Generic;
 using System.Net;
@@ -27,16 +28,23 @@ namespace ProductStoreChallenge.Web.Tests
         {
             TestWebApiHost.StopAsync().GetAwaiter().GetResult();
         }
-        //[TestMethod]
-        //public async Task TestPlaceOrder(Order order)
-        //{
-             
-        //    //var response = await Client.PostAsJsonAsync .PostAsJsonAsync("/Orders/", null);
-        //    //Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-        //    //var products = await response.Content.ReadAsAsync<IEnumerable<Product>>();
+        [TestMethod]
+        public async Task TestPlaceOrder()
+        {
+            var order = new Order
+            {
+                Items = new[] { new OrderItem { Qty = 1, ProductId = "8A7501FA-8AFA-4A4F-9CDB-7E9B3C86BFC0" }, new OrderItem { Qty = 2, ProductId = "2E09B84B-9980-4096-9FC6-1F6E8E846779" } }
+            };
 
-        //    //Assert.IsNotNull(products);
-        //}
+            var response = await Client.PostAsJsonAsync("/Orders/", order);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            var returnedOrder = await response.Content.ReadAsAsync<Order>();
 
+            Assert.IsFalse(string.IsNullOrEmpty(returnedOrder.Id));
+            Assert.IsNotNull(returnedOrder.CreatedAt);
+            Assert.IsNotNull(returnedOrder.Items);
+            Assert.IsNotNull(returnedOrder.TotalAmount);
+            Assert.IsTrue(returnedOrder.TotalAmount > 0);
+        }
     }
 }

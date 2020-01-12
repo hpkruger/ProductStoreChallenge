@@ -13,6 +13,7 @@ namespace ProductStoreChallenge.Controllers.Web
 
         public ProductsController(IProductRepository productRepository)
         {
+            // Hans: In the real-world, structured logging should be used throughout the code base, e.g. inject ILogger<ProductsController> here
             ProductRepository = productRepository;
         }
 

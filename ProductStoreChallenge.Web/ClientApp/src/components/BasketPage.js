@@ -1,24 +1,19 @@
 import React, { Component } from 'react';
-import { Row, Col } from 'reactstrap';
+import { Row, Col, Button } from 'reactstrap';
 
 import { Product } from './Product'
-import { BasketTotal } from './BasketTotal'
+import { BasketCheckout } from './BasketCheckout'
 
 export class BasketPage extends Component {
     static displayName = "Basket";
-    constructor(props) {
-        super(props);
-
-        this.state = { items: this.props.items}
-    }
 
     handleQtyChanged = (product, qty) => {
         this.props.onQtyChanged(product, qty);
     }
 
     render() {
-        let content = this.state.items.length === 0 ? <p>Basket is empty</p> :
-            this.state.items.map((item) =>
+        let content = this.props.items.length === 0 ? <p>Basket is empty</p> :
+            this.props.items.map((item) =>
                 <Col xs="4">
                     <Product key={item.product.id} value={item.product} onQtyChanged={this.handleQtyChanged} qty={item.qty}/>
                 </Col>
@@ -33,7 +28,9 @@ export class BasketPage extends Component {
                 <Row>
                     {content}
                 </Row>
-                <BasketTotal items={this.state.items}/>
+
+                {this.props.items.length > 0 && <BasketCheckout items={this.props.items} />}
+
             </React.Fragment>
         );
     }

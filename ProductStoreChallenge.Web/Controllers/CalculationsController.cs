@@ -18,15 +18,16 @@ namespace ProductStoreChallenge.Controllers.Web
             CalculationService = calculationService;
         }
 
-        [HttpPost("/ShippingCosts")]
-        public async Task<ActionResult<double>> CalculateShippingCostsAsync(Basket basket)
+        [HttpPost("Shipping")]
+        public async Task<ActionResult<decimal>> CalculateShippingAsync(Basket basket)
         {
             if (basket.Items == null || !basket.Items.Any())
             {
                 return BadRequest("Basket is empty");
             }
             // Hans: the asp.net web api controller layer should be kept very simple and besides doing some validation and returning meaningful errors to the caller, it should simply delegate to the service layer (which represents the business logic)
-            return await CalculationService.CalculateShippingCostsAsync(basket);
+            // Hans: Normally I would return the entire calculation (including SubTotalAmount and TotalAmount), but Challenge description says that only the shipping costs should be calculated on the server side
+            return (await CalculationService.CalculateAmountsAsync(basket)).ShippingAmount;
         }
     }
 }

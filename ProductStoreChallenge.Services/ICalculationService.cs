@@ -8,6 +8,7 @@ namespace ProductStoreChallenge.Services
 {
     public interface ICalculationService
     {
-        Task<double> CalculateShippingCostsAsync(Basket basket);
+        Task<(decimal SubTotalAmount, decimal ShippingAmount, decimal TotalAmount)> CalculateAmountsAsync(Basket basket);
+        Task<(decimal SubTotalAmount, decimal ShippingAmount, decimal TotalAmount)> CalculateAmountsAsync(Order order);
     }
 }
